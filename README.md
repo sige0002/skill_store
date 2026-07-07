@@ -33,6 +33,17 @@ cp -r <category>/<skill-name> ~/.claude/skills/
 | [sync-docs](docs/sync-docs/SKILL.md) | 日本語ドキュメント（正本）から英語ミラーを一方向再生成して同期する |
 | [learning-material-authoring](docs/learning-material-authoring/SKILL.md) | 初心者向け技術教材（章立て＋演習＋解答＋検証済みコード＋Typst/Marp ビルド）作成の型 |
 
+### agents-config/ — CLAUDE.md / AGENTS.md 運用
+
+| スキル | 内容 |
+|---|---|
+| [claude-md-improver](agents-config/claude-md-improver/SKILL.md)† | CLAUDE.md を6基準ルーブリックで採点し、最小差分で改善提案（公式 Anthropic・全ファイル markdown） |
+| [claude-md-drift-audit](agents-config/claude-md-drift-audit/SKILL.md)† | git 履歴と CLAUDE.md の乖離（ドリフト）を read-only で検出 |
+| [claude-md-link-check](agents-config/claude-md-link-check/SKILL.md)† | CLAUDE.md の @import・markdown リンク切れを read-only で検証 |
+| [claude-md-dependency-rescan](agents-config/claude-md-dependency-rescan/SKILL.md)† | 依存マニフェストと CLAUDE.md の差分を read-only で検出 |
+
+† 印はサードパーティ製スキル。出典・ライセンス（Apache-2.0 / MIT）・レビュー記録は [agents-config/SOURCES.md](agents-config/SOURCES.md) を参照。
+
 ### git/ — Git / GitHub 運用
 
 | スキル | 内容 |
@@ -60,14 +71,25 @@ cp -r <category>/<skill-name> ~/.claude/skills/
 | [rosbag-workflow](robotics/rosbag-workflow/SKILL.md) | rosbag の記録・ループ再生テストと DDS/QoS トラブル切り分け |
 | [rosbag-to-lerobot](robotics/rosbag-to-lerobot/SKILL.md) | rosbag(mcap) → LeRobot データセット変換の手順と落とし穴集 |
 | [video-stream-debug](robotics/video-stream-debug/SKILL.md) | ライブ映像プレビューが黒い/映らないときのデバッグチェックリスト |
+| [urdf-mjcf-to-usd-conversion](robotics/urdf-mjcf-to-usd-conversion/SKILL.md)* | URDF/MJCF → USD 変換パイプライン（Isaac Sim / Lab、xacro 対応） |
+| [isaac-sim-ros2-bridge](robotics/isaac-sim-ros2-bridge/SKILL.md)* | Isaac Sim ↔ ROS 2 ブリッジ（OmniGraph、Nav2、namespacing） |
+| [physics-simulation](robotics/physics-simulation/SKILL.md)* | Isaac Sim の物理シーン構成・physics センサ（例集付き） |
+| [data-collection-sim](robotics/data-collection-sim/SKILL.md)* | Replicator による合成データ生成（VLA/LeRobot 学習データ） |
+| [isaac-sim-troubleshooting](robotics/isaac-sim-troubleshooting/SKILL.md)* | Isaac Sim の診断フローチャート |
+| [usd-articulation](robotics/usd-articulation/SKILL.md)* | マルチアーム robot articulation の USD 構築・検証（Robot Schema） |
+| [isaac-sim-sensor](robotics/isaac-sim-sensor/SKILL.md)* | RTX/physics センサ・ベンダ lidar/radar・Replicator ランダム化 |
+| [navigation-primitives](robotics/navigation-primitives/SKILL.md)* | 移動ロボットナビの共通基盤（OccupancyMap、A*、footprint、chase camera） |
+| [occupancy-map](robotics/occupancy-map/SKILL.md)* | USD シーン → ROS 占有格子マップ生成（Nav2/MobilityGen 連携） |
+| [ros2-engineering-skills](robotics/ros2-engineering-skills/SKILL.md)* | ROS 2 開発の広範リファレンス（micro-ROS/PREEMPT_RT/MoveIt2/SROS2/Open-RMF/sim2real）。ros2-development の補完 |
 
-\* 印はサードパーティ製スキル（Apache-2.0）。出典とレビュー記録は [robotics/SOURCES.md](robotics/SOURCES.md) を参照。
+\* 印はサードパーティ製スキル。出典・ライセンス・レビュー記録は [robotics/SOURCES.md](robotics/SOURCES.md) を参照。arpitg1304 由来の5スキルと IsaacSim 9スキルは Apache-2.0（verbatim）。`ros2-engineering-skills` は Apache-2.0（frontmatter の hooks/evals を除去した改変あり）。
 
 ### security/ — セキュリティ
 
 | スキル | 内容 |
 |---|---|
 | [dependency-audit](security/dependency-audit/SKILL.md) | 依存パッケージのセキュリティ監査（インストール前クイック監査 + サプライチェーン詳細レビュー） |
+| [prompt-injection-scan](security/prompt-injection-scan/SKILL.md) | 外部スキル取込前に SKILL.md/AGENTS.md/CLAUDE.md をプロンプトインジェクション・脱獄・秘密送信・不可視文字の観点で走査（7分類パターン＋実行コード同梱検知） |
 
 ### workflow/ — メタワークフロー
 
@@ -91,5 +113,6 @@ cp -r <category>/<skill-name> ~/.claude/skills/
 
 ## ライセンス
 
-- `robotics/` の * 印5スキル: Apache-2.0（[出典](https://github.com/arpitg1304/robotics-agent-skills)、詳細は robotics/SOURCES.md）
+- `robotics/` の * 印スキル: サードパーティ製。arpitg1304 由来5スキルと IsaacSim 9スキルは Apache-2.0（verbatim）、`ros2-engineering-skills` は Apache-2.0（改変あり）。詳細は [robotics/SOURCES.md](robotics/SOURCES.md)
+- `agents-config/` の † 印スキル: サードパーティ製（Apache-2.0 / MIT）。詳細は [agents-config/SOURCES.md](agents-config/SOURCES.md)
 - その他: 本リポジトリのオリジナル
